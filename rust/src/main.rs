@@ -1,7 +1,7 @@
 use std::io;
 use std::env;
 
-mod one;
+mod y2017;
 
 fn main() {
     let day = env::args().nth(1).unwrap();
@@ -11,7 +11,7 @@ fn main() {
     let trimmed_input = input.trim();
 
     let day_fn = match day.as_ref() {
-        "one" => one::run,
+        "201701" => y2017::d1::run,
         _ => panic!("Day {:?} has not been implemented yet.", day),
     };
     day_fn(trimmed_input);
