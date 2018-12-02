@@ -8,7 +8,7 @@ fn main() {
     let day = env::args().nth(1).unwrap();
 
     let mut input = String::new();
-    while (io::stdin().read_line(&mut input).unwrap_or_default() > 0) {};
+    while io::stdin().read_line(&mut input).unwrap_or_default() > 0 {};
     let trimmed_input = input.trim();
 
     let day_fn = match day.as_ref() {
