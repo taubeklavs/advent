@@ -21,35 +21,27 @@ mod tests {
 }
 
 fn parse_input(captcha: &str) -> Vec<u32> {
-    let digits: Vec<u32> =
-        captcha
-        .chars()
-        .map(|x| x.to_digit(10).unwrap())
-        .collect();
+    let digits = captcha.chars().map(|x| x.to_digit(10).unwrap()).collect();
     return digits;
 }
 
-fn process_captcha(captcha: Vec<u32>,
-                   filter_fn: fn(usize, u32, &Vec<u32>) -> bool) -> u32 {
-    let res: u32 =
-        captcha
+fn process_captcha(captcha: Vec<u32>, filter_fn: fn(usize, u32, &Vec<u32>) -> bool) -> u32 {
+    let res: u32 = captcha
         .iter()
         .enumerate()
-        .filter_map(|(n, &x)|
-                    if filter_fn(n, x, &captcha) {
-                        Some(x)
-                    } else {
-                        None
-                    }
-        )
+        .filter_map(|(n, &x)| {
+            if filter_fn(n, x, &captcha) {
+                Some(x)
+            } else {
+                None
+            }
+        })
         .sum();
     return res;
 }
 
-fn reverse_captcha_filter_fn (iteration: usize,
-                              value: u32,
-                              captcha: &Vec<u32>) -> bool {
-    return (iteration + 1 < captcha.len()) && (value == captcha[iteration+1]);
+fn reverse_captcha_filter_fn(iteration: usize, value: u32, captcha: &Vec<u32>) -> bool {
+    return (iteration + 1 < captcha.len()) && (value == captcha[iteration + 1]);
 }
 
 fn reverse_captcha(captcha: &str) -> u32 {
@@ -58,19 +50,17 @@ fn reverse_captcha(captcha: &str) -> u32 {
     return process_captcha(parsed_captcha, reverse_captcha_filter_fn);
 }
 
-fn opposite_captcha_filter_fn (iteration: usize,
-                               value: u32,
-                               captcha: &Vec<u32>) -> bool {
+fn opposite_captcha_filter_fn(iteration: usize, value: u32, captcha: &Vec<u32>) -> bool {
     let index = (iteration + (captcha.len() / 2)) % (captcha.len());
     return captcha[index] == value;
 }
 
-fn opposite_captcha (captcha: &str) -> u32 {
+fn opposite_captcha(captcha: &str) -> u32 {
     let parsed_captcha: Vec<u32> = parse_input(captcha);
     return process_captcha(parsed_captcha, opposite_captcha_filter_fn);
 }
 
-pub fn run (captcha: &str) {
+pub fn run(captcha: &str) {
     println!("{}", reverse_captcha(captcha));
     println!("{}", opposite_captcha(captcha));
 }

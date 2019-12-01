@@ -17,16 +17,12 @@ mod tests {
 
     #[test]
     fn overlap_simple() {
-        let input = ["abcde",
-                     "fghij",
-                     "klmno",
-                     "pqrst",
-                     "fguij",
-                     "axcye",
-                     "wvxyz"]
-            .iter()
-            .map(|line| line.to_string())
-            .collect();
+        let input = [
+            "abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz",
+        ]
+        .iter()
+        .map(|line| line.to_string())
+        .collect();
         assert_eq!(overlap(&input), Some("fgij".to_string()));
     }
 }
@@ -45,22 +41,28 @@ fn appears_2_or_3_times(line: &String) -> (bool, bool) {
         let appearance = appearances.entry(c).or_insert(0);
         *appearance += 1;
     }
-    return (appearances.values().find(|&val| *val == 2).is_some(),
-            appearances.values().find(|&val| *val == 3).is_some());
+    return (
+        appearances.values().find(|&val| *val == 2).is_some(),
+        appearances.values().find(|&val| *val == 3).is_some(),
+    );
 }
 
-fn checksum (lines: &Vec<String>) -> i32 {
+fn checksum(lines: &Vec<String>) -> i32 {
     let mut twice = 0;
     let mut thrice = 0;
     for line in lines {
         let (twice_line, thrice_line) = appears_2_or_3_times(line);
-        if twice_line { twice += 1}
-        if thrice_line { thrice += 1}
+        if twice_line {
+            twice += 1
+        }
+        if thrice_line {
+            thrice += 1
+        }
     }
     return twice * thrice;
 }
 
-fn line_overlap (line1: &String, line2: &String) -> String {
+fn line_overlap(line1: &String, line2: &String) -> String {
     let mut overlap = String::new();
     for i in 0..line1.len() {
         if line1.chars().nth(i) == line2.chars().nth(i) {
@@ -70,7 +72,7 @@ fn line_overlap (line1: &String, line2: &String) -> String {
     return overlap;
 }
 
-fn overlap (lines: &Vec<String>) -> Option<String> {
+fn overlap(lines: &Vec<String>) -> Option<String> {
     for i in 0..lines.len() {
         for j in i..lines.len() {
             let line_overlap = line_overlap(&lines[i], &lines[j]);
