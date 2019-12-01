@@ -6,6 +6,7 @@ use std::io;
 
 mod y2017;
 mod y2018;
+mod y2019;
 
 fn main() {
     let day = env::args().nth(1).unwrap();
@@ -19,6 +20,7 @@ fn main() {
         "201801" => y2018::d1::run,
         "201802" => y2018::d2::run,
         "201803" => y2018::d3::run,
+        "201901" => y2019::d1::run,
         _ => panic!("Day {:?} has not been implemented yet.", day),
     };
     day_fn(trimmed_input);
