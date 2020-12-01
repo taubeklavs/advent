@@ -8,6 +8,8 @@ mod y2017;
 mod y2018;
 mod y2019;
 
+mod helpers;
+
 fn main() {
     let day = env::args().nth(1).unwrap();
 
