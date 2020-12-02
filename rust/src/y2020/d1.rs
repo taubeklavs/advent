@@ -97,7 +97,7 @@ fn find_multiplication_of_sum_of_2020_optimized(
     goal: i32,
 ) -> Option<i32> {
     let closure = |v: &i32, goal: &i32, cnt: &i32| -> Option<i32> {
-        if cnt > &2 {
+        if *cnt > 2 {
             let vs =
                 find_multiplication_of_sum_of_2020_optimized(&expense_set, count - 1, goal - v);
             if vs.is_some() {
