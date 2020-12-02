@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::BTreeSet;
 use std::iter::FromIterator;
 
 use crate::helpers;
@@ -27,7 +27,7 @@ mod tests {
     fn test_find_sum_of_2020_optimized_1() {
         assert_eq!(
             find_multiplication_of_sum_of_2020_optimized(
-                &HashSet::from_iter([1721, 979, 366, 299, 675, 1456].iter().cloned()),
+                &BTreeSet::from_iter([1721, 979, 366, 299, 675, 1456].iter().cloned()),
                 2,
                 2020
             )
@@ -40,7 +40,7 @@ mod tests {
     fn test_find_sum_of_2020_optimized_2() {
         assert_eq!(
             find_multiplication_of_sum_of_2020_optimized(
-                &HashSet::from_iter([1721, 979, 366, 299, 675, 1456].iter().cloned()),
+                &BTreeSet::from_iter([1721, 979, 366, 299, 675, 1456].iter().cloned()),
                 3,
                 2020
             )
@@ -92,7 +92,7 @@ fn find_multiplication_of_sum_of_2020_naive(expenses: &Vec<i32>, count: i32) -> 
 }
 
 fn find_multiplication_of_sum_of_2020_optimized(
-    expense_set: &HashSet<i32>,
+    expense_set: &BTreeSet<i32>,
     count: i32,
     goal: i32,
 ) -> Option<i32> {
@@ -131,7 +131,7 @@ pub fn run(input: &str) {
     helpers::run_benchmarked(|| find_multiplication_of_sum_of_2020_naive(&expenses, 3));
     helpers::run_benchmarked(|| {
         find_multiplication_of_sum_of_2020_optimized(
-            &HashSet::from_iter(expenses.iter().cloned()),
+            &BTreeSet::from_iter(expenses.iter().cloned()),
             2,
             2020,
         )
@@ -139,7 +139,7 @@ pub fn run(input: &str) {
     });
     helpers::run_benchmarked(|| {
         find_multiplication_of_sum_of_2020_optimized(
-            &HashSet::from_iter(expenses.iter().cloned()),
+            &BTreeSet::from_iter(expenses.iter().cloned()),
             3,
             2020,
         )
