@@ -109,6 +109,6 @@ fn solve_2(input: &str) -> i32 {
 }
 
 pub fn run(input: &str) {
-    helpers::run_benchmarked(|| solve_1(input));
-    helpers::run_benchmarked(|| solve_2(input));
+    helpers::run_benchmarked(|| println!("{}", solve_1(input)));
+    helpers::run_benchmarked(|| println!("{}", solve_2(input)));
 }

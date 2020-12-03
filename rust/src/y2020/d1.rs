@@ -127,22 +127,32 @@ fn parse_input(input: &str) -> Vec<i32> {
 
 pub fn run(input: &str) {
     let expenses = parse_input(input);
-    helpers::run_benchmarked(|| find_multiplication_of_sum_of_2020_naive(&expenses, 2));
-    helpers::run_benchmarked(|| find_multiplication_of_sum_of_2020_naive(&expenses, 3));
-    helpers::run_benchmarked(|| {
-        find_multiplication_of_sum_of_2020_optimized(
-            &BTreeSet::from_iter(expenses.iter().cloned()),
-            2,
-            2020,
+    let p1_naive = || println!("{}", find_multiplication_of_sum_of_2020_naive(&expenses, 2));
+    let p2_naive = || println!("{}", find_multiplication_of_sum_of_2020_naive(&expenses, 3));
+    helpers::run_benchmarked(p1_naive);
+    helpers::run_benchmarked(p2_naive);
+    let p1_optimized = || {
+        println!(
+            "{}",
+            find_multiplication_of_sum_of_2020_optimized(
+                &BTreeSet::from_iter(expenses.iter().cloned()),
+                2,
+                2020
+            )
+            .unwrap()
         )
-        .unwrap()
-    });
-    helpers::run_benchmarked(|| {
-        find_multiplication_of_sum_of_2020_optimized(
-            &BTreeSet::from_iter(expenses.iter().cloned()),
-            3,
-            2020,
+    };
+    helpers::run_benchmarked(p1_optimized);
+    let p2_optimized = || {
+        println!(
+            "{}",
+            find_multiplication_of_sum_of_2020_optimized(
+                &BTreeSet::from_iter(expenses.iter().cloned()),
+                3,
+                2020
+            )
+            .unwrap()
         )
-        .unwrap()
-    });
+    };
+    helpers::run_benchmarked(p2_optimized);
 }
