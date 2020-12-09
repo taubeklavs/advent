@@ -62,9 +62,10 @@ fn solve_1(parsed: &Vec<u64>, preamble_length: usize) -> u64 {
 fn solve_2(parsed: &Vec<u64>, n: u64) -> u64 {
     for i in 0..parsed.len() {
         let mut j = i;
+        let mut set_sum: u64 = 0;
         loop {
             let contiguous_set = &parsed[i..j];
-            let set_sum: u64 = contiguous_set.iter().sum();
+            set_sum += parsed[j];
             if set_sum < n {
                 j += 1;
             } else if set_sum == n {
