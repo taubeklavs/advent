@@ -60,24 +60,21 @@ fn solve_1(parsed: &Vec<u64>, preamble_length: usize) -> u64 {
 }
 
 fn solve_2(parsed: &Vec<u64>, n: u64) -> u64 {
-    for i in 0..parsed.len() {
-        let mut j = i;
-        let mut set_sum: u64 = 0;
-        loop {
-            let contiguous_set = &parsed[i..j];
-            set_sum += parsed[j];
-            if set_sum < n {
-                j += 1;
-            } else if set_sum == n {
-                let min = contiguous_set.iter().min().unwrap();
-                let max = contiguous_set.iter().max().unwrap();
-                return min + max;
-            } else {
-                break;
-            }
+    let mut lo = 0;
+    let mut hi = 0;
+    let mut set_sum: u64 = 0;
+    while set_sum != n {
+        if set_sum > n {
+            set_sum -= parsed[lo];
+            lo += 1;
+        } else {
+            set_sum += parsed[hi];
+            hi += 1;
         }
     }
-    panic!();
+    let min = parsed[lo..hi].iter().min().unwrap();
+    let max = parsed[lo..hi].iter().max().unwrap();
+    return min + max;
 }
 
 fn parse_input(input: &str) -> Vec<u64> {
