@@ -34,6 +34,7 @@ fn main() {
         "202007" => y2020::d7::run,
         "202008" => y2020::d8::run,
         "202009" => y2020::d9::run,
+        "202010" => y2020::d10::run,
         _ => panic!("Day {:?} has not been implemented yet.", day),
     };
     day_fn(trimmed_input);
