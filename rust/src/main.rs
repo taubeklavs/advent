@@ -1,3 +1,5 @@
+#![feature(destructuring_assignment)]
+
 #[macro_use]
 extern crate lazy_static;
 
@@ -36,6 +38,7 @@ fn main() {
         "202009" => y2020::d9::run,
         "202010" => y2020::d10::run,
         "202011" => y2020::d11::run,
+        "202012" => y2020::d12::run,
         _ => panic!("Day {:?} has not been implemented yet.", day),
     };
     day_fn(trimmed_input);
